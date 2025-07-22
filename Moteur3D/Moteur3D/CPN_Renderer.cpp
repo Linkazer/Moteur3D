@@ -109,30 +109,6 @@ void CPN_Renderer::Render()
 		}
 
 		matShader.SetVec3("viewPos", RenderingManager::GetInstance()->GetMainCamera()->GetTransform()->GetPosition()); //REVIEW : See to change the Fragment Shader for the ViewPos to not be necessary (Use view positions instead of world positions)
-
-		//Textures (TODO : A modifier quand on fera le Texture Manager)
-		std::vector<Texture> textures = materials[i]->GetTextures();
-		unsigned int diffuseNr = 0;
-		unsigned int specularNr = 0;
-
-		for (unsigned int i = 0; i < textures.size(); i++)
-		{
-			glActiveTexture(GL_TEXTURE0 + i);
-			std::string number;
-
-			if (textures[i].type == "Diffuse")
-			{
-				number = std::to_string(diffuseNr++);
-				matShader.SetMat4(("material.diffuse[" + number + "]").c_str(), i);
-			}
-			else if (textures[i].type == "Specular")
-			{
-				number = std::to_string(specularNr++);
-				matShader.SetMat4(("material.specular[" + number + "]").c_str(), i);
-			}
-
-			glBindTexture(GL_TEXTURE_2D, textures[i].id);
-		}
 	}
 
 	//Textures and Shader
@@ -145,6 +121,30 @@ void CPN_Renderer::Render()
 		material.GetShader().Use();
 
 		//Render
+		//Textures (TODO : A modifier quand on fera le Texture Manager)
+		std::vector<Texture> textures = material.GetTextures();
+		unsigned int diffuseNr = 0;
+		unsigned int specularNr = 0;
+
+		for (unsigned int i = 0; i < textures.size(); i++)
+		{
+			glActiveTexture(GL_TEXTURE0 + i);
+			std::string number;
+
+			if (textures[i].type == "Diffuse")
+			{
+				number = std::to_string(diffuseNr++);
+				material.GetShader().SetMat4(("material.diffuse[" + number + "]").c_str(), i);
+			}
+			else if (textures[i].type == "Specular")
+			{
+				number = std::to_string(specularNr++);
+				material.GetShader().SetMat4(("material.specular[" + number + "]").c_str(), i);
+			}
+
+			glBindTexture(GL_TEXTURE_2D, textures[i].id);
+		}
+
 		glBindVertexArray(meshesToRender[j]->GetVAO());
 		glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(meshesToRender[j]->GetIndices().size()), GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);

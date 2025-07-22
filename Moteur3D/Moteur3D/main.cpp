@@ -54,7 +54,7 @@ int main()
     std::shared_ptr<CPN_LightCaster> directionalLight = std::make_shared<CPN_LightCaster>();
     directionalLight->SetData(LIGHTTYPE_Directional,
                                 glm::vec3(0.1f, 0.1f, 0.1f),
-                                glm::vec3(0.96f, 0.38f, 0.17f),
+                                glm::vec3(0.96f, 0.38f, 0.17f) * 2.0f,
                                 glm::vec3(1.0f, 1.0f, 1.0f),
                                 0.0f,
                                 0.0f,
@@ -68,7 +68,7 @@ int main()
     std::shared_ptr<CPN_LightCaster> pointLight = std::make_shared<CPN_LightCaster>();
     pointLight->SetData(LIGHTTYPE_Point,
                                 glm::vec3(0.0f, 0.1f, 0.1f),
-                                glm::vec3(0.0f, 0.13f, 0.8f),
+                                glm::vec3(0.0f, 0.13f, 0.8f) * 2.0f,
                                 glm::vec3(0.0f, 0.16f, 1.0f),
                                 0.14f,
                                 0.07f,

@@ -73,6 +73,7 @@ void CPN_CameraController::Update(float deltaTime)
 	}
 }
 
+//--REVIEW : Try to use callbacks instead of checking every frame for inputs--
 void CPN_CameraController::InputEventMoveForward()
 {
 	//cameraMovementDirection.x += 1;
@@ -112,3 +113,4 @@ void CPN_CameraController::InputEventEndedMoveLeft()
 {
 	//cameraMovementDirection.y += 1;
 }
+//----------------------------------------------------------------------------

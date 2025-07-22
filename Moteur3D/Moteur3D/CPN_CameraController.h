@@ -27,7 +27,7 @@ public :
 	//----------------------------------------------------------------------------
 
 private :
-	float movementSpeed = 1.0f;
+	float movementSpeed = 2.5f;
 	float mouseSensibility = 5.0f;
 
 	glm::vec2 cameraMovementDirection;
