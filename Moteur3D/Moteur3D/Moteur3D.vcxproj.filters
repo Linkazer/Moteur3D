@@ -135,5 +135,11 @@
   <ItemGroup>
     <None Include="ShaderTest.vs" />
     <None Include="ShaderTest.fs" />
+    <None Include="composite.vs" />
+    <None Include="composite.fs" />
+    <None Include="screen.vs" />
+    <None Include="screen.fs" />
+    <None Include="opaque.vs" />
+    <None Include="opaque.fs" />
   </ItemGroup>
 </Project>

@@ -11,7 +11,7 @@ class Modele;
 class CPN_Renderer : public Component
 {
 public :
-	explicit CPN_Renderer();
+	explicit CPN_Renderer(bool nIsOpaque);
 	virtual ~CPN_Renderer();
 
 	void Initialize(GameObject& nContainingGameObject) override;
@@ -24,6 +24,8 @@ public :
 	
 private :
 	std::shared_ptr<Modele> modele;
+
+	bool isOpaque;
 };
 
 #endif

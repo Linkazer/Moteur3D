@@ -43,7 +43,7 @@ public:
 	/// Add a CPN_Renderer to the Render step.
 	/// </summary>
 	/// <param name="rendererToAdd">The CPN_Renderer to add.</param>
-	static void AddRendererToRender(CPN_Renderer& rendererToAdd);
+	static void AddRendererToRender(CPN_Renderer& rendererToAdd, bool isOpaque);
 	/// <summary>
 	/// Remove a CPN_Renderer from the Render step.
 	/// </summary>
@@ -79,7 +79,36 @@ public:
 
 private:
 	std::vector<CPN_Renderer*> renderersToRender;
+	std::vector<CPN_Renderer*> renderersTransparentToRender;
 	std::vector<CPN_LightCaster*> lightsToRender;
+
+	unsigned int quadVAO;
+	unsigned int quadVBO;
+	unsigned int opaqueFBO;
+	unsigned int opaqueTexture;
+	unsigned int depthTexture;
+	unsigned int transparentFBO;
+	unsigned int accumTexture;
+	unsigned int revealTexture;
+
+	glm::vec4 zeroFillerVec{ 0.0f, 0.0f, 0.0f, 0.0f };
+	glm::vec4 oneFillerVec{ 1.0f, 1.0f, 1.0f, 1.0f };
+
+	float quadVertices[30] = { //Fullscreen Plane
+		// positions		// uv
+		-1.0f, -1.0f, 0.0f,	0.0f, 0.0f,
+		 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+		 1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
+
+		 1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
+		-1.0f,  1.0f, 0.0f, 0.0f, 1.0f,
+		-1.0f, -1.0f, 0.0f, 0.0f, 0.0f
+	};
+
+	std::unique_ptr<Shader> opaqueShader;
+	std::unique_ptr<Shader> transparentShader;
+	std::unique_ptr<Shader> compositeShader;
+	std::unique_ptr<Shader> screenShader;
 
 	CPN_Camera* mainCamera;
 };

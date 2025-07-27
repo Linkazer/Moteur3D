@@ -68,10 +68,13 @@ public:
 	/// <param name="toDelete">The GameObject to remove from the Engine.</param>
 	void DeleteGameObject(GameObject& toDelete);
 
+	inline static int GetWindowWidth() { return widowWidth; }
+	inline static int GetWindowHeight() { return widowHeight; }
+
 private:
 	GLFWwindow* window; //We can't use a smart pointer with GLFWwindow (TODO : Or we could create a custom deleter later)
-	int widowWidth = 1280;
-	int widowHeight = 720;
+	const static int widowWidth = 1280;
+	const static int widowHeight = 720;
 
 	std::unique_ptr<RenderingManager> renderingManagerPtr;
 	std::unique_ptr<InputManager> inputManagerPtr;

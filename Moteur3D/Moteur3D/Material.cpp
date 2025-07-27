@@ -10,9 +10,16 @@
 
 #include "Material.h"
 
-Material::Material()
+Material::Material(bool isOpaque)
 {
-	shader = new Shader("ShaderTest.vs", "ShaderTest.fs");
+	if (isOpaque)
+	{
+		shader = new Shader("opaque.vs", "opaque.fs");
+	}
+	else
+	{
+		shader = new Shader("ShaderTest.vs", "ShaderTest.fs");
+	}
 }
 
 Material::~Material()

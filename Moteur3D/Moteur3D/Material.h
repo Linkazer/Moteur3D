@@ -12,7 +12,7 @@ enum TextureType;
 class Material
 {
 public:
-	explicit Material();
+	explicit Material(bool isOpaque);
 	~Material();
 
 	/// <summary>

@@ -7,8 +7,7 @@
 #define MAX_LIGHT_DIRECTIONAL 2
 #define MAX_LIGHT_SPOT 4
 
-layout (location = 0) out vec4 accum;
-layout (location = 1) out float reveal;
+layout (location = 0) out vec4 FragColor;
 
 struct Material {
     sampler2D diffuse[MAX_MATERIAL_DIFFUSE];
@@ -67,17 +66,7 @@ void main()
         result += CalculateSpotLight(spotLights[i], norm, FragPos, viewDir);
     }
 
-    result.a = 0.5;
-
-    // weight function
-	float weight = clamp(pow(min(1.0, result.a * 10.0) + 0.01, 3.0) * 1e8 * pow(1.0 - gl_FragCoord.z * 0.9, 3.0), 1e-2, 3e3);
-	
-	// store pixel color accumulation
-	accum = vec4(result.rgb * result.a, result.a) * weight;
-	//accum = result;
-	
-	// store pixel revealage threshold
-	reveal = result.a;
+    FragColor = result;
 } 
 
 vec4 CalculateDirectionLight(Light light, vec3 normal, vec3 viewDir)

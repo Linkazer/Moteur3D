@@ -171,6 +171,12 @@
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="composite.fs" />
+    <None Include="composite.vs" />
+    <None Include="opaque.fs" />
+    <None Include="opaque.vs" />
+    <None Include="screen.fs" />
+    <None Include="screen.vs" />
     <None Include="ShaderTest.fs" />
     <None Include="ShaderTest.vs" />
   </ItemGroup>

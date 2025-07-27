@@ -26,7 +26,7 @@ public:
 	/// Load the Modele.
 	/// </summary>
 	/// <param name="path">The path where the Modele is stored.</param>
-	void LoadModele(std::string const& path);
+	void LoadModele(std::string const& path, bool isOpaque);
 
 	/// <summary>
 	/// Get all the Modele's meshes.
@@ -56,7 +56,7 @@ private :
 	/// <param name="materialToProcess">The Assimp Material to process.</param>
 	/// <param name="scene">The parent Scene used.</param>
 	/// <returns>The newly created Material.</returns>
-	Material ProcessMaterial(aiMaterial* materialToProcess, const aiScene* scene);
+	Material ProcessMaterial(aiMaterial* materialToProcess, const aiScene* scene, bool isOpaque);
 	/// <summary>
 	/// Process an Assimp Mesh and transcribes it in a Mesh class.
 	/// </summary>

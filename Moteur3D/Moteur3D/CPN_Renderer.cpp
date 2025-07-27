@@ -21,9 +21,10 @@
 #include <string>
 #include<iostream>
 
-CPN_Renderer::CPN_Renderer()
+CPN_Renderer::CPN_Renderer(bool nIsOpaque)
 	: Component()
 {
+	isOpaque = nIsOpaque;
 }
 
 CPN_Renderer::~CPN_Renderer()
@@ -35,9 +36,9 @@ void CPN_Renderer::Initialize(GameObject& nContainingGameObject)
 	Component::Initialize(nContainingGameObject);
 
 	modele = std::make_shared<Modele>();
-	modele->LoadModele("ressources/objects/backpack.obj"); //REVIEW : Should move once the ModeleManager is done.
+	modele->LoadModele("ressources/objects/backpack.obj", isOpaque); //REVIEW : Should move once the ModeleManager is done.
 
-	RenderingManager::GetInstance()->AddRendererToRender(*this);
+	RenderingManager::GetInstance()->AddRendererToRender(*this, isOpaque);
 }
 
 void CPN_Renderer::Destroy()

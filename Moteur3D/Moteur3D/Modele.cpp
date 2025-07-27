@@ -25,7 +25,7 @@ Modele::~Modele()
 {
 }
 
-void Modele::LoadModele(std::string const& path)
+void Modele::LoadModele(std::string const& path, bool isOpaque)
 {
 	//Load with Assimp
 	Assimp::Importer importer;
@@ -43,7 +43,7 @@ void Modele::LoadModele(std::string const& path)
 	//Material process
 	for (unsigned int i = 0; i < scene->mNumMaterials; i++)
 	{
-		materials.push_back(std::make_shared<Material>(ProcessMaterial(scene->mMaterials[i], scene)));
+		materials.push_back(std::make_shared<Material>(ProcessMaterial(scene->mMaterials[i], scene, isOpaque)));
 	}
 
 	//Node process
@@ -66,9 +66,9 @@ void Modele::ProcessAssimpNode(aiNode* node, const aiScene* scene)
 	}
 }
 
-Material Modele::ProcessMaterial(aiMaterial* materialToProcess, const aiScene* scene)
+Material Modele::ProcessMaterial(aiMaterial* materialToProcess, const aiScene* scene, bool isOpaque)
 {
-	Material processedMaterial;
+	Material processedMaterial = Material(isOpaque);
 
 	processedMaterial.LoadMaterial(*materialToProcess, modelDirectoryPath); //REVIEW : See if we should put all the Assimp logic outside of the Material class.
 

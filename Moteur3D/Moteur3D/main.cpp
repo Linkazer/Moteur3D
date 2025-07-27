@@ -31,7 +31,7 @@ int main()
     //---Tests---
     std::vector<GameObject*> objVec;
 
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 5; i++)
     {
         objVec.push_back(new GameObject());
         objVec.back()->Initialize();
@@ -45,7 +45,7 @@ int main()
     objVec[1]->GetTransform()->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 
     //Renderer Test Object
-    std::shared_ptr<CPN_Renderer> renderer = std::make_shared<CPN_Renderer>();
+    std::shared_ptr<CPN_Renderer> renderer = std::make_shared<CPN_Renderer>(false);
     objVec[1]->AddComponent(*renderer);
     objVec[1]->GetTransform()->SetPosition(glm::vec3(0.0f, 0.0f, -10.0f));
 
@@ -88,6 +88,11 @@ int main()
                                 glm::cos(glm::radians(9.0f)),
                                 glm::cos(glm::radians(12.0f)));
     objVec[0]->AddComponent(*spotLight);
+
+    //Blending Test
+    std::shared_ptr<CPN_Renderer> renderer2 = std::make_shared<CPN_Renderer>(true);
+    objVec[4]->AddComponent(*renderer2);
+    objVec[4]->GetTransform()->SetPosition(glm::vec3(0.0f, 0.0f, -15.0f));
 
     //--End Test--
 
