@@ -65,9 +65,13 @@ void CPN_CameraController::Update(float deltaTime)
 
 		float xRotation = InputManager::GetInstance()->mousePosY - InputManager::GetInstance()->lastMousePosY;
 
-		cameraOrientation += glm::vec3(xRotation, yRotation, 0.0f) * mouseSensibility * deltaTime;
+		cameraOrientation = glm::vec3(fmod(cameraOrientation.x + xRotation * mouseSensibility * deltaTime, 360.0f),
+									  fmod(cameraOrientation.y + yRotation * mouseSensibility * deltaTime, 360.0f),
+									  0);
 
-		containingGameObject->GetTransform()->SetEulerAngles(cameraOrientation);
+		containingGameObject->GetTransform()->SetEulerAngles(glm::vec3(0.0f, cameraOrientation.y, 0.0f));
+
+		containingGameObject->GetTransform()->Rotate(glm::vec3(1.0f, 0.0f, 0.0f) * cameraOrientation.x);
 	}
 	else
 	{

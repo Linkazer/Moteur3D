@@ -40,7 +40,7 @@ void Transform::Rotate(glm::vec3 rotationWanted) //REVIEW : See if we can add th
 
 void Transform::Rotate(glm::quat rotationWanted)
 {
-	rotation *= rotationWanted;
+	rotation *= glm::inverse(rotation) * rotationWanted * rotation;
 }
 
 void Transform::SetRotation(glm::quat rotationToSet)
@@ -50,12 +50,12 @@ void Transform::SetRotation(glm::quat rotationToSet)
 
 void Transform::SetEulerAngles(glm::vec3 eulerAnglesToSet)
 {
-	rotation = glm::quat(eulerAnglesToSet * (3.14159f / 180.f));
+	rotation = glm::quat(eulerAnglesToSet * 3.14159f / 180.f);
 }
 
 glm::vec3 Transform::GetEulerAngles() const
 {
-	return glm::eulerAngles(rotation) * 3.14159f / 180.f;
+	return glm::eulerAngles(rotation) * 180.0f / 3.14159f;
 }
 
 glm::quat Transform::GetQuaternion() const
