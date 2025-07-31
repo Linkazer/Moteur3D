@@ -62,7 +62,7 @@ int main()
                                 0.0f);
     objVec[2]->AddComponent(*directionalLight);
     objVec[2]->GetTransform()->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
-    objVec[2]->GetTransform()->RotateByAngle(glm::vec2(150.0f, 25.0f));
+    objVec[2]->GetTransform()->SetEulerAngles(glm::vec3(150.0f, 25.0f, 0.0f));
 
     //Point
     std::shared_ptr<CPN_LightCaster> pointLight = std::make_shared<CPN_LightCaster>();

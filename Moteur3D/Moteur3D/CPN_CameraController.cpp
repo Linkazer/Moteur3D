@@ -22,6 +22,8 @@ void CPN_CameraController::Initialize(GameObject& nContainingGameObject)
 {
 	Component::Initialize(nContainingGameObject);
 
+	cameraOrientation = containingGameObject->GetTransform()->GetEulerAngles();
+
 	/*InputManager::GetInstance()->AddCallback(GLFW_KEY_W, 0, GLFW_PRESS, InputEventMoveForward); //REVIEW : See if we can use callback instead of check on Update.
 	InputManager::GetInstance()->AddCallback(GLFW_KEY_S, 0, GLFW_PRESS, InputEventMoveBackward);
 	InputManager::GetInstance()->AddCallback(GLFW_KEY_A, 0, GLFW_PRESS, InputEventMoveRight);
@@ -59,13 +61,13 @@ void CPN_CameraController::Update(float deltaTime)
 	{
 		InputManager::GetInstance()->ShowMouse(false);
 
-		float xRotation = InputManager::GetInstance()->mousePosX - InputManager::GetInstance()->lastMousePosX;
+		float yRotation = InputManager::GetInstance()->mousePosX - InputManager::GetInstance()->lastMousePosX;
 
-		float yRotation = InputManager::GetInstance()->mousePosY - InputManager::GetInstance()->lastMousePosY;
+		float xRotation = InputManager::GetInstance()->mousePosY - InputManager::GetInstance()->lastMousePosY;
 
-		glm::vec2 rotationToApply = glm::vec2(xRotation, yRotation);
+		cameraOrientation += glm::vec3(xRotation, yRotation, 0.0f) * mouseSensibility * deltaTime;
 
-		containingGameObject->GetTransform()->RotateByAngle(rotationToApply * mouseSensibility * deltaTime);
+		containingGameObject->GetTransform()->SetEulerAngles(cameraOrientation);
 	}
 	else
 	{

@@ -26,19 +26,21 @@ public :
 	/// Make the Transform rotate around the X and Y axis.
 	/// </summary>
 	/// <param name="rotationWanted">The amount of degree to rotate.</param>
-	void RotateByAngle(glm::vec2 rotationWanted);
+	void Rotate(glm::vec3 eulerRotation);
 
 	/// <summary>
 	/// Rotate using Quaternions.
 	/// </summary>
 	/// <param name="rotationWanted">Rotation wanted.</param>
-	void Rotate(glm::quat rotationWanted);
+	void Rotate(glm::quat quaternionRotation);
 
 	/// <summary>
 	/// Set the rotation of the Transform.
 	/// </summary>
 	/// <param name="rotationToSet">The Quaternion used to set the rotation.</param>
 	void SetRotation(glm::quat rotationToSet);
+
+	void SetEulerAngles(glm::vec3 eulerAnglesToSet);
 
 	/// <summary>
 	/// Get the current rotation of the Transform in Euler angles.
@@ -75,8 +77,7 @@ public :
 	glm::vec3 position; //REVIEW : See if we need it in public. (Only the Camera is using it)
 
 private :
-	glm::vec3 eulerAngles;
-	glm::quat quaternion;
+	glm::quat rotation;
 	glm::vec3 scale;
 
 	glm::mat4 modelMatrix;

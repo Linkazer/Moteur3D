@@ -31,6 +31,7 @@ private :
 	float mouseSensibility = 5.0f;
 
 	glm::vec2 cameraMovementDirection;
+	glm::vec3 cameraOrientation;
 
 };
 #endif
